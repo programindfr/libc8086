@@ -28,7 +28,7 @@ dump:
 	hexdump -C main.bin
 
 clean:
-	rm -f dump.S *.o *.elf *.bin
+	rm -f *.o *.elf *.bin
 
 archive:
 	git archive -o ar/8086_$(shell date "+%Y%m%d").tar.gz main
