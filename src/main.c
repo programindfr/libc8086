@@ -1,5 +1,3 @@
-__asm__ ("jmp main;");
-
 #include <lib8086.h>
 
 void main(void)

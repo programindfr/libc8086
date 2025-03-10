@@ -4,7 +4,8 @@ SECTIONS
 	. = 0x7c00;
 	.text : AT(0x7c00)
 	{
-		*(.text);
+		*(.text.main);
+		*(.text*);
 	}
 	.sig : AT(0x7dfe)
 	{

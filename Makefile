@@ -2,7 +2,7 @@ CC = ia16-elf-gcc
 LD = ia16-elf-ld
 OC = ia16-elf-objcopy
 
-CCFLAGS = -Os -ffreestanding -Wall -Werror -Ilib
+CCFLAGS = -Os -ffreestanding -ffunction-sections -Wall -Werror -Ilib
 LDFLAGS = -static -Tlink.ld -nostdlib --nmagic -Llib
 OCFLAGS = -O binary
 
@@ -24,7 +24,7 @@ qemu:
 	qemu-system-x86_64 -drive format=raw,file=main.bin
 
 dump:
-	$(CC) $(CCFLAGS) -S src/main.c -o dump.S
+	ia16-elf-objdump -D -M i8086 -M att main.elf
 	hexdump -C main.bin
 
 clean:
