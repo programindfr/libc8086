@@ -1,4 +1,5 @@
-#include <lib8086.h>
+#include "8086.h"
+#include "stdio.h"
 
 void main(void)
 {
