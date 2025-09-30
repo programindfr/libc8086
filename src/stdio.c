@@ -1,12 +1,14 @@
+#include "8086.h"
 #include "stdio.h"
 #include <stddef.h>
 
 void
 putc(char c)
 {
-	__asm__ __volatile__ (
+	/*__asm__ __volatile__ (
 		"int $0x10;" : : "a"(0x0e00 | c), "b"(0x0007)
-	);
+	);*/
+	write(c);
 }
 
 void
@@ -22,13 +24,14 @@ puts(const char *s)
 int
 getc(void)
 {
-	int c;
+	/*int c;
 
 	__asm__ __volatile__ (
 		"int $0x16;" : "=a"(c) : "a"(0x0000)
 	);
 
-	return 0x00ff & c;
+	return 0x00ff & c;*/
+	return read();
 }
 
 char *

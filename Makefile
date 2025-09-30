@@ -2,7 +2,7 @@ CC = ia16-elf-gcc
 LD = ia16-elf-ld
 OC = ia16-elf-objcopy
 
-CCFLAGS = -Os -ffreestanding -ffunction-sections -Wall -Wextra -Werror -Isrc/include
+CCFLAGS = -Os -ffreestanding -ffunction-sections -Wall -Wextra -Werror -pedantic -Isrc/include
 LDFLAGS = -static -Tlink.ld -nostdlib --nmagic -Lsrc/include
 OCFLAGS = -O binary
 
@@ -14,13 +14,13 @@ main.bin: main.elf
 main.elf: main.o 8086.o stdio.o
 	$(LD) $(LDFLAGS) $^ -o $@
 
-main.o: main.c src/include/8086.h src/include/stdio.h
+main.o: main.c $(addprefix src/include/, 8086.h stdio.h)
 	$(CC) $(CCFLAGS) -c $< -o $@
 
-8086.o: src/8086.c src/include/8086.h
+8086.o: $(addprefix src/, 8086.s) $(addprefix src/include/, 8086.h)
 	$(CC) $(CCFLAGS) -c $< -o $@
 
-stdio.o: src/stdio.c src/include/stdio.h
+stdio.o: $(addprefix src/, stdio.c) $(addprefix src/include/, stdio.h)
 	$(CC) $(CCFLAGS) -c $< -o $@
 
 qemu:
